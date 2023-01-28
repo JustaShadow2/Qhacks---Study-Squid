@@ -19,10 +19,9 @@ def send_home():
 def send_report(path):
     return send_from_directory('static', path)
 
-@app.route('/api/calc', methods='GET')
+@app.route('/api/calc') #, methods=['GET'] but its automatically set to GET so no need to specify
 def api():
-    if request.method == 'GET':
-        return  jsonify({'question': pickone[0]()}, {'answer': getJson[0]()}, {'steps': getJson[1]()})
+        return  jsonify({'question': pickone[0]()}), {'answer': getJson[0](pickone[0]())}, {'steps': getJson[1](pickone[0]())}
 
 if __name__ == '__main__':
     app.run(debug=True)
