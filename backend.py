@@ -21,7 +21,7 @@ def send_report(path):
 
 @app.route('/api/calc') #, methods=['GET'] but its automatically set to GET so no need to specify
 def api():
-        return  jsonify({'question': pickone[0]()}), {'answer': getJson[0](pickone[0]())}, {'steps': getJson[1](pickone[0]())}
+        return  jsonify({'question': pickone()[0]}), {'answer': getJson[0](pickone()[0])}, {'steps': getJson[1](pickone()[0])}
 
 if __name__ == '__main__':
     app.run(debug=True)
