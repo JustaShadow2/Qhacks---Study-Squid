@@ -36,16 +36,15 @@ fetch("./sample_questions.json").then(res => res.json()).then(qs => {
 
 $('#submit').click(function() {
     let ans = mf.value
-    if (!ans || guesses.has(ans)) return
+    if (!ans || mf.disabled || guesses.has(ans)) return
     else if (ans == answer) { // if correct
         $('#wronglol').hide()
         $('#correctgg').show()
         mf.disabled = true
-        xp += Math.max(0, 5 - guesses.size)
-        loadXP()
+        addXP(Math.max(0, 5 - guesses.size))
         return $('#nextQ').show()
     }
-    else { // if correct
+    else { // if not correct
         guesses.add(ans)
         mf.executeCommand("selectAll")
         return $('#wronglol').show()
@@ -56,6 +55,14 @@ $('#nextQ').click(function() {
     rollQuestion()
     mf.value = ""
 })
+
+document.body.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        if (mf.disabled) $("#nextQ").click();
+        else $("#submit").click();
+        event.preventDefault();
+    }
+});
 
 ///// XP SHIT BECAUSE I AM FIVE YEARS OLD /////
 function getXPForLevel(x) {
@@ -74,8 +81,27 @@ function loadXP() {
     let prev = getXPForLevel(lvl - 1)
     let progress = ((xp - prev) / (nextXP - prev)) * 100
     $('#xpProgress').css("width", progress + "%")
+    // $('#xpProgress').css("background-color", `hsl(${(lvl * 5) % 360}, 100%, 50%)`)
     $('#xpCount').text(`${xp} / ${nextXP} · · · · · Level ${lvl}`)
     saveData.xp = xp
     localStorage.mathSquid = JSON.stringify(saveData)
 }
 loadXP()
+
+function addXP(amt) {
+    let oldLevel = getLevel(xp)
+    xp += amt
+    let newLevel = getLevel(xp)
+    if (oldLevel < newLevel) {
+        $('#xpProgress').css("width", "100%")
+        setTimeout(() => {
+            $('#xpProgress').css("transition-duration", "0s")
+            $('#xpProgress').css("width", "0%")
+            setTimeout(() => {
+                $('#xpProgress').css("transition-duration", "")
+                loadXP() 
+            }, 10);
+        }, 105);
+    }
+    else loadXP()
+}
