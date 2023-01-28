@@ -14,25 +14,24 @@ function choose(arr) {
 }
 
 // pick and display a question
-function rollQuestion() {
+function makeQuestion(q) {
     mf.disabled = false
-    let problem = choose(questions)
     $('.hideOnLoad').hide()
-    $('#randQuestion').text(problem.q)
-    answer = problem.a
+    $('#randQuestion').text(q)
+    answer = 69
 }
 
 // fetch the questions
-let questions = []
 let answer = null
 let guesses = new Set()
 
-fetch("./sample_questions.json").then(res => res.json()).then(qs => {
-    questions = qs
+async function rollQuestion() {
+    let qs = await fetch("./api").then(res => res.json())
     guesses.clear()
-    rollQuestion()
-    $('#everything').show()
-})
+    makeQuestion(qs.question)
+    $('#maths').show()
+}
+// rollQuestion()
 
 $('#submit').click(function() {
     let ans = mf.value
