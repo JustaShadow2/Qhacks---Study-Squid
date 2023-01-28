@@ -35,18 +35,21 @@
 
     <div id="maths" class="main centerFlex" style="display: none">
         <div class="mainQuestion centerFlex">
-            <h1>solve this question motherfucker</h1>
             <math-field read-only id="randQuestion"></math-field>
 
             <p id="wronglol" class="hideOnLoad" style="margin-top: 0px; color: red"><b>Wrong! Try again.</b></p>
             <p id="correctgg" class="hideOnLoad" style="margin-top: 0px; color: lime"><b>Correct!</b></p>
             <math-field id="answer" virtual-keyboard-mode="manual"></math-field>
             <div class="centerFlex" style="flex-direction: row">
-                <button id="submit">awooga</button>
-                <button id="steps" class="hideOnLoad" style="margin-left: 10px; background-color: aqua">steps</button>
-                <button id="nextQ" class="hideOnLoad" style="margin-left: 10px; background-color: lime">next</button>
+                <button id="submit">Submit</button>
+                <button id="steps" class="hideOnLoad" style="margin-left: 10px; background-color: aqua">View Steps</button>
+                <button id="nextQ" class="hideOnLoad" style="margin-left: 10px; background-color: lime">Next</button>
             </div>
-            <img id="stepsImg">
+            <p id="loadingHint" class="hideOnLoad"></p>
+            <div class="hideOnLoad" id="hintImage">
+                <p>(solution via wolfram)</p>
+                <img id="stepsImg" src="https://www6b3.wolframalpha.com/Calculate/MSP/MSP59221372b23g8faefgfb0000626448b138bfg323?MSPStoreType=image/gif&s=8">
+            </div>
         </div>
 
         <div class="xpBar centerFlex">

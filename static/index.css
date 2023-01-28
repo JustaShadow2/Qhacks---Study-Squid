@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
 body {
     background-color: #2a2a2a;
     color: white;
@@ -34,7 +36,8 @@ button {
     border: none;
     border-radius: 5px;
     font-size: 18px;
-    font-family: comic sans ms;
+    font-family: Lato;
+    font-weight: bold;
     margin-top: 20px;
     height: 40px;
     width: 150px;
@@ -94,6 +97,16 @@ math-field {
 
 .subjectIcon img {
     width: 120px;
+}
+
+#hintImage {
+    background-color: black;
+    margin-top: 15px;
+    max-height: 300px;
+    max-width: 800px;
+    overflow: auto;
+    border: 2px solid white;
+    border-radius: 5px;
 }
 
 .xpBar {

@@ -79,13 +79,17 @@ $('#submit').click(function() {
 
 $('#steps').click(async function() {
     $('#steps').hide()
+    $('#loadingHint').text("Loading steps...")
+    $('#loadingHint').show()
     let steps = await fetch("./api/steps/" + answerID).then(res => res.json())
     console.log(steps)
-    if (!steps || !steps.queryresult || !steps.queryresult.pods) return alert("no hints here!")
+    if (!steps || !steps.queryresult || !steps.queryresult.pods) return $('#loadingHint').text("No steps availible!.")
     let img = steps.queryresult.pods.map(x => x.subpods).flat().sort((a, b) => b.img.height - a.img.height)[0].img
     console.log(img)
     $('#stepsImg').attr("src", img.src)
     $('#stepsImg').attr("alt", img.alt)
+    $('#hintImage').show()
+    $('#loadingHint').hide()
 })
 
 $('#nextQ').click(function() {
