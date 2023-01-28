@@ -18,10 +18,9 @@ function makeQuestion(q) {
     mf.disabled = false
     $('.hideOnLoad').hide()
     $('#randQuestion').text(q)
-    answer = 69
 }
 
-let answer = null
+let answerID = 0
 let guesses = new Set()
 
 let category = null
@@ -36,27 +35,42 @@ $('.subjectOption').click(function() {
 $('.subjectOption:first').trigger("click")
 
 async function rollQuestion() {
-    let qs = await fetch("./api/" + category).then(res => res.text())
+    let qs = await fetch("./api/" + category).then(res => res.json())
     guesses.clear()
-    makeQuestion(qs)
+    makeQuestion(qs.question)
+    answerID = qs.id
+    console.log(qs)
     $('#maths').show()
 }
 
 $('#submit').click(function() {
     let ans = mf.value
     if (!ans || mf.disabled || guesses.has(ans)) return
-    else if (ans == answer) { // if correct
-        $('#wronglol').hide()
-        $('#correctgg').show()
-        mf.disabled = true
-        addXP(Math.max(0, 5 - guesses.size))
-        return $('#nextQ').show()
-    }
-    else { // if not correct
-        guesses.add(ans)
-        mf.executeCommand("selectAll")
-        return $('#wronglol').show()
-    }
+
+    $.ajax({
+        url: "./api/solve", type: "post",
+        data: JSON.stringify({ id: answerID, answer: ans }),
+        headers: { 'Content-Type': 'application/json'}
+    })
+    .done(function(res) {
+        alert(res)
+    })
+    .fail(function (e) {
+        return alert("Something went wrong!")
+    })
+
+    // else if (ans == answer) { // if correct
+    //     $('#wronglol').hide()
+    //     $('#correctgg').show()
+    //     mf.disabled = true
+    //     addXP(Math.max(0, 5 - guesses.size))
+    //     return $('#nextQ').show()
+    // }
+    // else { // if not correct
+    //     guesses.add(ans)
+    //     mf.executeCommand("selectAll")
+    //     return $('#wronglol').show()
+    // }
 })
 
 $('#nextQ').click(function() {

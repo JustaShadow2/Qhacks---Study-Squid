@@ -29,19 +29,21 @@ def send_report(path):
 @app.route('/api/calc')
 def api():
     picked = pickone()
+    pickedID = qID
     questions[qID["id"]] = picked
     qID["id"] += 1
-    return picked
+    return { "question": picked, "id": pickedID["id"] }
 
 @app.route('/api/list')
 def list():
     return questions
 
-@app.route('/api/solve/<path:id>', methods = ['POST'])
-def solve(id):
-    return request.form
-    q = getQuestion(id)
+@app.route('/api/solve', methods = ['POST'])
+def solve():
+    data = request.json
+    q = getQuestion(data["id"])
     if (not q): return "x"
+    entered = request.answer
     return getAnswer(q)
 
 @app.route('/api/steps/<path:id>')
