@@ -4,9 +4,9 @@ def pickone():
     #randomly picks a function to run
     num = random.randint(1, 2)
     if num == 1:
-        limits()
+        return limits()
     if num == 2:
-        derivatives()
+        return derivatives()
     # if equation == 3:
     #     integrals()
 
