@@ -20,6 +20,7 @@ function makeQuestion(q) {
     $('#randQuestion').text(q)
 }
 
+let loading = true
 let answerID = 0
 let guesses = new Set()
 
@@ -39,13 +40,14 @@ async function rollQuestion() {
     guesses.clear()
     makeQuestion(qs.question)
     answerID = qs.id
-    console.log(qs)
     $('#maths').show()
+    loading = false
 }
 
 $('#submit').click(function() {
     let ans = mf.value
-    if (!ans || mf.disabled || guesses.has(ans)) return
+    if (!ans || loading || mf.disabled || guesses.has(ans)) return
+    loading = true
 
     $.ajax({
         url: "./api/solve", type: "post",
@@ -53,24 +55,37 @@ $('#submit').click(function() {
         headers: { 'Content-Type': 'application/json'}
     })
     .done(function(res) {
-        alert(res)
+        if (res == true || res == "true") { // if correct
+            $('#wronglol').hide()
+            $('#correctgg').show()
+            mf.disabled = true
+            addXP(Math.max(0, 5 - guesses.size))
+            $('#nextQ').show()
+            return loading = false
+        }
+        else { // if not correct
+            guesses.add(ans)
+            mf.executeCommand("selectAll")
+            $('#steps').show()
+            $('#wronglol').show()
+            return loading = false
+        }
     })
     .fail(function (e) {
+        loading = false
         return alert("Something went wrong!")
     })
+})
 
-    // else if (ans == answer) { // if correct
-    //     $('#wronglol').hide()
-    //     $('#correctgg').show()
-    //     mf.disabled = true
-    //     addXP(Math.max(0, 5 - guesses.size))
-    //     return $('#nextQ').show()
-    // }
-    // else { // if not correct
-    //     guesses.add(ans)
-    //     mf.executeCommand("selectAll")
-    //     return $('#wronglol').show()
-    // }
+$('#steps').click(async function() {
+    $('#steps').hide()
+    let steps = await fetch("./api/steps/" + answerID).then(res => res.json())
+    console.log(steps)
+    if (!steps || !steps.queryresult || !steps.queryresult.pods) return alert("no hints here!")
+    let img = steps.queryresult.pods.map(x => x.subpods).flat().sort((a, b) => b.img.height - a.img.height)[0].img
+    console.log(img)
+    $('#stepsImg').attr("src", img.src)
+    $('#stepsImg').attr("alt", img.alt)
 })
 
 $('#nextQ').click(function() {

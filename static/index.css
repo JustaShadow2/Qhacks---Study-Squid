@@ -46,7 +46,7 @@ math-field {
     border: 2px solid white;
     border-radius: 3px;
     padding: 0px 5px;
-    --selection-color: blue;
+    --selection-color: aqua;
 }
 
 #randQuestion {
