@@ -58,4 +58,31 @@ def derivatives():
     if (equation == 4):
         n = 3
     return solutionSend
-
+def integrals():
+    problem = str
+    solutionSend = str
+    #bounded = random.randint(1,2) #definite or indefinite
+    #discarded bounded integrals
+    type = random.randint(1,2) #usub, IBP, trig sub
+    if (type == 1): #usub. implement definite integrals later.
+        a = random.randint(1,5)
+        subtype = random.randint(2,4)
+        if (subtype == 2):
+            problem = "\int\\frac{\left(x^"+str(a)+"\\right)}{1+x^"+str(a+1)+"}dx"
+        if (subtype == 3):
+            problem = "\int\\frac{\left(x\\right)}{1+x^"+str(a+1)+"}dx"
+        if (subtype == 4):
+            problem = "\int\\frac{1}{1+\sqrt{x}}dx"
+        solutionSend = problem.replace("+", "%2B")
+    if (type == 2): #trig sub. add definite integrals later
+        subtype = random.randint(1,3)
+        a = pow(random.randint(1,6), 2)
+        if (subtype == 1):
+            problem = "\int\sqrt{x^2+"+str(a)+"}dx"
+            solutionSend = problem.replace("+", "%2B")
+        if (subtype == 2):
+            problem = "\int\sqrt{x^2-"+str(a)+"}dx"
+            solutionSend = problem.replace("+", "%2B")
+        if (subtype == 3):
+            problem = "\int\sqrt{"+str(a)+"-x^2}dx"
+            solutionSend = problem.replace("+", "%2B")
