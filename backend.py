@@ -21,7 +21,7 @@ def send_report(path):
 @app.route('/api/calc', methods='GET')
 def api():
     if request.method == 'GET':
-        return  jsonify({'question': pickone()})
+        return  jsonify({'question': pickone[0]()})
 
 if __name__ == '__main__':
     app.run(debug=True)
