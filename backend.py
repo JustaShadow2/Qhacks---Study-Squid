@@ -6,7 +6,7 @@ import random
 #import functions
 from calculus1 import limits, derivatives, pickone
 from linAlg import RREFMatrix
-from wolfram import getJson
+from woflram import getJson
 
 
 app = Flask(__name__)
