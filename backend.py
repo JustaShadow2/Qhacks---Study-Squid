@@ -4,7 +4,7 @@ import json
 import random
 
 #import functions
-from calculus1.py import limits, derivatives, picone
+from calculus1.py import limits, derivatives, pickone
 from linAlg import RREFMatrix
 
 
