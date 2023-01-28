@@ -86,3 +86,4 @@ def integrals():
         if (subtype == 3):
             problem = "\int\sqrt{"+str(a)+"-x^2}dx"
             solutionSend = problem.replace("+", "%2B")
+    return problem, solutionSend
