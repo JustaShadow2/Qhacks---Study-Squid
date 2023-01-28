@@ -1,5 +1,14 @@
 import random
 
+def pickone():
+    #randomly picks a function to run
+    num = random.randint(1, 3)
+    if num == 1:
+        return limits()
+    if num == 2:
+        return derivatives()
+    if num == 3:
+        return integrals()
 
 def limits():
     problem = str
@@ -114,3 +123,4 @@ def integrals():
             problem = "\int\sqrt{"+str(a)+"-x^2}dx"
         solutionSend = problem.replace("+", "%2B")
     return problem, solutionSend
+

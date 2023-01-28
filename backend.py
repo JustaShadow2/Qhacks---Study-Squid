@@ -53,8 +53,6 @@ def solve():
     response = requests.get(api) 
     return response.text
 
-    return getAnswer(q)
-
 @app.route('/api/steps/<path:id>')
 def steps(id):
     q = getQuestion(id)
