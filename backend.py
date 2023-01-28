@@ -4,7 +4,7 @@ import json
 import random
 
 #import functions
-from calculus1.py import limits, derivatives, integrals, thefunction
+from calculus1.py import limits, derivatives, picone
 from linAlg import RREFMatrix
 
 
@@ -21,7 +21,7 @@ def send_report(path):
 @app.route('/api', methods=['GET', 'POST'])
 def api():
     if request.method == 'GET':
-        return  jsonify({'question': limits()})
+        return  jsonify({'question': pickone()})
 
 if __name__ == '__main__':
     app.run(debug=True)
