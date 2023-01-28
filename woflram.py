@@ -1,15 +1,17 @@
 
 id = "Q6XVVP-E4R2JPV6TH"
 import requests
-def getJson(math):
+def getSteps(math):
     #api = "http://api.wolframalpha.com/v1/conversation.jsp?appid=" + id + "&i=" + math + "&background=" + str(background) + "&foreground=" + str(foreground) + "&format=image"
     api = "http://api.wolframalpha.com/v2/query?appid=" + id +"&input=" + math + "&podstate=Step-by-step%20solution&format=image&output=json"
     image = requests.get(api)
-    json = image.text #uses .text to acsess response content stored in image. assigns this to value.
+    return image.text #uses .text to acsess response content stored in image. assigns this to value.
+
+def getAnswer(math):
     api = "http://api.wolframalpha.com/v1/result?appid=" + id + "&i=" + math
     answer = requests.get(api)
-    value = answer.text
-    return value, json #returns the json. frontend can deal with extracting the SRC or steps as necessary
+    return answer.text
+
 # def getAnswer(math):
 #     api = "http://api.wolframalpha.com/v1/result?appid=" + id + "&i=" + math
 #     answer = requests.get(api)

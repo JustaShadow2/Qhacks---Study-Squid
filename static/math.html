@@ -11,11 +11,33 @@
 </head>
 <body>
 
-    <div id="everything" class="main centerFlex" style="display: none">
+    <div id="home" class="main centerFlex">
+        <div class="title">
+            <img style="height: 74px" src="./assets/squid.png">
+            <h2 style="font-size: 58px">Study Squid</h2>
+        </div>
+        <h1 style="margin-bottom: 50px; margin-top: 0px; opacity: 80%">Select subject:</h1>
+        <div class="subjects">
+            <div class="centerFlex subjectOption" category="calc">
+                <p>Calculus</p>
+                <div class="subjectIcon">
+                    <img src="./assets/calc.svg">
+                </div>
+            </div>
+            <div class="centerFlex subjectOption" category="linear">
+                <p>Linear Algebra</p>
+                <div class="subjectIcon">
+                    <img src="./assets/linear.svg">
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div id="maths" class="main centerFlex" style="display: none">
         <div class="mainQuestion centerFlex">
             <h1>solve this question motherfucker</h1>
-            <p id="randQuestion"></p>
+            <math-field read-only id="randQuestion"></math-field>
+
             <p id="wronglol" class="hideOnLoad" style="margin-top: 0px; color: red"><b>Wrong! Try again.</b></p>
             <p id="correctgg" class="hideOnLoad" style="margin-top: 0px; color: lime"><b>Correct!</b></p>
             <math-field id="answer" virtual-keyboard-mode="manual"></math-field>

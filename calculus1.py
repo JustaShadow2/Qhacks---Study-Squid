@@ -34,7 +34,7 @@ def limits():
         n = random.randint(1, 3)
         problem = "\lim _{x\\to \infty \:}\left(\left(" + str(n) + "+" + str(n+1) + "x\\right)^{\\frac{" + str((n*random.randint(1, 3) + 1)) + "}{" + str(n+1) + "\ln \left(x\\right)}}\\right)"
         solutionSend = problem.replace("\lim", "lim").replace("+", "%2B")
-    return problem, solutionSend
+    return solutionSend
 
 
 def derivatives():
@@ -57,5 +57,5 @@ def derivatives():
         solutionSend = problem.replace("+", "%2B")
     if (equation == 4):
         n = 3
-    return problem, solutionSend
+    return solutionSend
 

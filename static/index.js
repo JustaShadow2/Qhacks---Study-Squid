@@ -21,17 +21,26 @@ function makeQuestion(q) {
     answer = 69
 }
 
-// fetch the questions
 let answer = null
 let guesses = new Set()
 
+let category = null
+let categoryName = null
+
+$('.subjectOption').click(function() {
+    category = $(this).attr('category')
+    categoryName = $(this).find("p").text()
+    rollQuestion()
+    $('#home').hide()
+})
+$('.subjectOption:first').trigger("click")
+
 async function rollQuestion() {
-    let qs = await fetch("./api").then(res => res.json())
+    let qs = await fetch("./api/" + category).then(res => res.text())
     guesses.clear()
-    makeQuestion(qs.question)
+    makeQuestion(qs)
     $('#maths').show()
 }
-// rollQuestion()
 
 $('#submit').click(function() {
     let ans = mf.value

@@ -6,10 +6,17 @@ import random
 #import functions
 from calculus1 import limits, derivatives, pickone
 from linAlg import RREFMatrix
-from woflram import getJson
+from woflram import getSteps, getAnswer
 
+qID = { "id": 0 }
+questions = {}
 
 app = Flask(__name__)
+
+def getQuestion(id):
+    id = int(id)
+    if id in questions: return questions[id]
+    else: return
 
 @app.route('/')
 def send_home():
@@ -19,9 +26,29 @@ def send_home():
 def send_report(path):
     return send_from_directory('static', path)
 
-@app.route('/api/calc') #, methods=['GET'] but its automatically set to GET so no need to specify
+@app.route('/api/calc')
 def api():
-        return  jsonify({'question': pickone()[0]}), {'answer': getJson[0](pickone()[0])}, {'steps': getJson[1](pickone()[0])}
+    picked = pickone()
+    questions[qID["id"]] = picked
+    qID["id"] += 1
+    return picked
+
+@app.route('/api/list')
+def list():
+    return questions
+
+@app.route('/api/solve/<path:id>', methods = ['POST'])
+def solve(id):
+    return request.form
+    q = getQuestion(id)
+    if (not q): return "x"
+    return getAnswer(q)
+
+@app.route('/api/steps/<path:id>')
+def steps(id):
+    q = getQuestion(id)
+    if (not q): return "x"
+    return json.loads(getSteps(q))
 
 if __name__ == '__main__':
     app.run(debug=True)

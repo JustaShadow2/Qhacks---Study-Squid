@@ -6,14 +6,22 @@ body {
 
 .centerflex {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .main { 
     width: 100%;
     height: 100%;
+    text-align: center
 }
 
 .mainQuestion h1 {
@@ -39,6 +47,53 @@ math-field {
     border-radius: 3px;
     padding: 0px 5px;
     --selection-color: blue;
+}
+
+#randQuestion {
+    margin: 15px 0px 25px 0px;
+    border: none !important;
+    display: flex;
+    justify-content: center;
+}
+
+.ML__content {
+    justify-content: center !important;
+}
+
+.subjects {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.subjectOption {
+    cursor: pointer;
+    width: 300px;
+    height: 300px;
+    border: 2px solid white;
+    border-radius: 12px;
+    margin: 0px 28px;
+    transition-duration: 0.1s;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.subjectOption:hover {
+    scale: 1.03;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.subjectOption p {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.subjectIcon {
+    height: 135px;
+}
+
+.subjectIcon img {
+    width: 120px;
 }
 
 .xpBar {
