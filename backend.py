@@ -29,21 +29,30 @@ def send_report(path):
 @app.route('/api/calc')
 def api():
     picked = pickone()
-    pickedID = qID
-    questions[qID["id"]] = picked
+
+    pickedID = qID["id"]
+    questions[qID["id"]] = picked[1]
     qID["id"] += 1
-    return { "question": picked, "id": pickedID["id"] }
+    return { "question": picked[1], "id": pickedID }
 
 @app.route('/api/list')
 def list():
     return questions
 
-@app.route('/api/solve', methods = ['POST'])
+@app.route('/api/solve', methods=['POST'])
 def solve():
     data = request.json
+    print(data)
     q = getQuestion(data["id"])
     if (not q): return "x"
-    entered = request.answer
+    entered = data["answer"]
+    key = "Q6XVVP-E4R2JPV6TH"
+    print(q)
+    print(entered)
+    api = "http://api.wolframalpha.com/v1/result?appid=" + key + "&i=" + entered + "%3D" + q
+    response = requests.get(api) 
+    return response.text
+
     return getAnswer(q)
 
 @app.route('/api/steps/<path:id>')
