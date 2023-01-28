@@ -8,9 +8,9 @@ def limits():
     if equation == 1:
         n = random.randint(10, 20)
         if (random.choice([-1, 1]) < 0):
-            problem = "\lim_{x\\to\:-" + str(n) + "}\left(\\frac{" + str(n-1) + "-\sqrt{x^2-" + str((pow(n, 2) - pow(n-1, 2))) + "}}{x+" + str(n) + "}\\right)"
+            problem = "\lim_{x\\to\:-" + str(n) + "}\left(\\frac{" + str(n-1) + "-\sqrt{x^2-" + str((pow(n, 2) - pow((n-1), 2))) + "}}{x+" + str(n) + "}\\right)"
         else:
-            problem = "\lim_{x\\to\:" + str(n) + "}\left(\\frac{" + str(n-1) + "-\sqrt{x^2-" + str((pow(n, 2) - pow(n - 1, 2))) + "}}{x-" + str(n) + "}\\right)"
+            problem = "\lim_{x\\to\:" + str(n) + "}\left(\\frac{" + str(n-1) + "-\sqrt{x^2-" + str((pow(n, 2) - pow((n-1), 2))) + "}}{x-" + str(n) + "}\\right)"
         solutionSend = problem.replace("\lim", "lim").replace("+", "%2B")
     if equation == 2:
         n = random.randint(1, 9)
@@ -21,11 +21,10 @@ def limits():
         solutionSend = problem.replace("\lim", "lim").replace("+", "%2B")
     if equation == 3:
         n = random.randint(1, 9)
-        n2 = n * random.choice([-1, 1])
         if (random.choice([-1, 1]) < 0):
-            problem = "\lim_{x\\to\:-" + str(n) + "}\left(\\frac{x^2-" + str(pow(n, 2)) + "}{\left(x-" + str(n2) + "\\right)\left(x" + str(random.choice(["+", "-"])) + str(random.randint(1, 9)) + "\\right)}\\right)"
+            problem = "\lim_{x\\to\:-" + str(n) + "}\left(\\frac{x^2-" + str(pow(n, 2)) + "}{\left(x+" + str(n) + "\\right)\left(x" + str(random.choice(["+", "-"])) + str(random.randint(1, 9)) + "\\right)}\\right)"
         else:
-            problem = "\lim_{x\\to\:" + str(n) + "}\left(\\frac{x^2-" + str(pow(n, 2)) + "}{\left(x-" + str(n2) + "\\right)\left(x" + str(random.choice(["+", "-"])) + str(random.randint(1, 9)) + "\\right)}\\right)"
+            problem = "\lim_{x\\to\:" + str(n) + "}\left(\\frac{x^2-" + str(pow(n, 2)) + "}{\left(x-" + str(n) + "\\right)\left(x" + str(random.choice(["+", "-"])) + str(random.randint(1, 9)) + "\\right)}\\right)"
         solutionSend = problem.replace("\lim", "lim").replace("+", "%2B")
     if equation == 4:
         n = random.randint(1, 3)
