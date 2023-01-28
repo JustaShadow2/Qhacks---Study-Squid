@@ -40,3 +40,24 @@ math-field {
     padding: 0px 5px;
     --selection-color: blue;
 }
+
+.xpBar {
+    position: fixed;
+    bottom: 0px;
+    height: 40px;
+    width: 100%;
+    background-color: black;
+    border-top: 2px solid white;
+}
+
+#xpProgress {
+    background-color: blue;
+    width: 0%;
+    height: 100%;
+    position: absolute;
+    z-index: -10;
+    pointer-events: none;
+    left: 0px;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-in-out;
+}
