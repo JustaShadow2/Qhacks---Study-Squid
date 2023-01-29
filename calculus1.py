@@ -62,7 +62,7 @@ def derivatives():
         else:
             n, n2 = (random.choice(["cos", "sin", "tan", "arccos", "arcsin", "arctan", "sec", "csc", "cot"]) for x in range(2))
             n3 = ""
-        problem = ("\\frac{d}{dx}\left(" + str(n) + "\left(" + str(n2) + "\left(x\:\\right)\\right)\\right)" + n3)
+        problem = ("\\frac{d}{dx}\left(" + str(n) + "\left(" + str(n2) + "\left(x\:\\right)\\right)\\right)" + str(n3))
         solutionSend = problem.replace("+", "%2B").replace("=", "%3D")
     if equation == 3:
         n = random.choice(["arccos", "arcsin", "arctan"])
@@ -81,8 +81,9 @@ def derivatives():
             n3 = (",\:x=\\frac{" + str(n32) + "\\pi}{" + str(n31) + "}")
         else:
             n3 = ""
-        problem = ("\\frac{d}{dx}\left(e^{\\frac{" + str(n+1) + "}{" + str(n) + n2 + "\left(x\\right)}}\\right)" + n3)
-        solutionSend = problem.replace("+", "%2B").replace("=", "%3D")
+        problemAdd = "\\frac{" + str(n + 1) + "}{" + str(n) + n2 + "\left(x\\right)}"
+        problem = ("\\frac{d}{dx}\left(e^{" + problemAdd + "}\\right)" + str(n3))
+        solutionSend = problem.replace("+", "%2B").replace("=", "%3D").replace(problemAdd, str(n + 1) + "/(" + str(n) + n2 + "(x))")
     if equation == 5:
         n, n2 = (random.choice(["cos", "sin", "tan", "sec", "csc", "cot"]) for x in range(2))
         if bool(random.getrandbits(1)):
@@ -95,7 +96,7 @@ def derivatives():
             n3 = ""
         while n2 == n:
             n2 = random.choice(["cos", "sin", "tan", "sec", "csc", "cot"])
-        problem = ("\\frac{d}{dx}\left(\\frac{" + str(n) + "\left(x\\right)\:" + str(random.choice(["+", "-"])) + "\:" + str(n2) + "\left(x\\right)}{" + str(n) + "\left(x\\right)}\\right)" + n3)
+        problem = ("\\frac{d}{dx}\left(\\frac{" + str(n) + "\left(x\\right)\:" + str(random.choice(["+", "-"])) + "\:" + str(n2) + "\left(x\\right)}{" + str(n) + "\left(x\\right)}\\right)" + str(n3))
         solutionSend = problem.replace("+", "%2B").replace("=", "%3D")
     return problem, solutionSend
 
@@ -123,4 +124,3 @@ def integrals():
             problem = "\int\sqrt{"+str(a)+"-x^2}dx"
         solutionSend = problem.replace("+", "%2B")
     return problem, solutionSend
-
