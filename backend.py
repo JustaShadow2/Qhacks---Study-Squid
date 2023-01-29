@@ -5,7 +5,7 @@ import random
 
 #import functions
 from calculus1 import limits, derivatives, pickone
-from linAlg import RREFMatrix
+from linAlg import NewMatrix
 from woflram import getSteps, getAnswer
 
 qID = { "id": 0 }
@@ -34,6 +34,10 @@ def api():
     questions[qID["id"]] = picked[1]
     qID["id"] += 1
     return { "question": picked[0], "id": pickedID }
+
+@app.route('/api/linalg')
+def apiLinAlg():
+    matrix = NewMatrix()
 
 @app.route('/api/list')
 def list():
