@@ -33,7 +33,7 @@ $('.subjectOption').click(function() {
     rollQuestion()
     $('#home').hide()
 })
-$('.subjectOption:first').trigger("click")
+// $('.subjectOption:first').trigger("click")
 
 async function rollQuestion() {
     let qs = await fetch("./api/" + category).then(res => res.json())
@@ -55,7 +55,7 @@ $('#submit').click(function() {
         headers: { 'Content-Type': 'application/json'}
     })
     .done(function(res) {
-        if (res == true || res == "true") { // if correct
+        if (res == "yes") { // if correct
             $('#wronglol').hide()
             $('#correctgg').show()
             mf.disabled = true
@@ -83,7 +83,7 @@ $('#steps').click(async function() {
     $('#loadingHint').show()
     let steps = await fetch("./api/steps/" + answerID).then(res => res.json())
     console.log(steps)
-    if (!steps || !steps.queryresult || !steps.queryresult.pods) return $('#loadingHint').text("No steps availible!.")
+    if (!steps || !steps.queryresult || !steps.queryresult.pods) return $('#loadingHint').text("No steps availible!")
     let img = steps.queryresult.pods.map(x => x.subpods).flat().sort((a, b) => b.img.height - a.img.height)[0].img
     console.log(img)
     $('#stepsImg').attr("src", img.src)
