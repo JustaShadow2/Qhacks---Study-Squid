@@ -1,29 +1,26 @@
 import random
+import numpy as np
+from sympy.matrices import Matrix
 
-#def Matrix(min, max, isSquare, isAugmented):
-def RREFMatrix():
-    #Todo:
-        #Implement augmented matrices
-        #Implement non-square matrices
-    #Current State:
-        #Basically just makes matrices that are easy to RREF
-    min = 2
-    max = 5
-    n = random.randint(min, max)
-    isSquare = True
-    isAugmented = False
-    if (isSquare):
-        m = n
+def NewMatrix():
+    m = random.randint(2, 5)
+    isSquare = bool(random.getrandbits(1))
+    if isSquare:
+        n = m
+        matrix = np.random.randint(0, 9, (m, n))
+        x = RREF(matrix)
     else:
-        while (m == n):
-            m = random.randint(min, max)
-    if (isAugmented and (isSquare == False)): #doesnt work rn, too lazy to fix. gonna focus on calclus 
-        m = m + 1 #m + 1 matrices so we have augmented stuff woo
-    x = [[0 for i in range(n)] for j in range(m)] # x is now a 10x10 array of 0
-    for i in range(n-1):
-        for j in range (m-1):
-            x[i][j] = random.randint()
-            if (i >= 1):
-                while (x[i][j] % x[i-1][j] != 0):
-                    x[i][j] = random.randint()
-    return x #passes back the matrix
+        n = m + 1
+        matrix = np.random.randint(0, 9, (m, n))
+        x = Augmented(n, matrix)
+    array = np.array(x)
+    return isSquare, array
+def RREF(matrix):
+    xunsolved = Matrix(matrix)
+    x = Matrix.echelon_form(xunsolved)
+    return x
+def Augmented(n, matrix):
+    A = Matrix(np.delete(matrix, n - 1, 1))
+    b = Matrix(matrix[:, n - 1])
+    x = A.LUsolve(b)
+    return x
