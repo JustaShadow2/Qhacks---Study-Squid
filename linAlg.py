@@ -13,8 +13,8 @@ def NewMatrix():
         n = m + 1
         matrix = np.random.randint(0, 9, (m, n))
         x = Augmented(n, matrix)
-    array = np.array(x)
-    return isSquare, array
+    solution = np.array(x)
+    return isSquare, matrix, solution
 def RREF(matrix):
     xunsolved = Matrix(matrix)
     x = Matrix.echelon_form(xunsolved)
