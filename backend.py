@@ -33,7 +33,7 @@ def api():
     pickedID = qID["id"]
     questions[qID["id"]] = picked[1]
     qID["id"] += 1
-    return { "question": picked[1], "id": pickedID }
+    return { "question": picked[0], "id": pickedID }
 
 @app.route('/api/list')
 def list():
