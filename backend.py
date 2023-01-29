@@ -5,7 +5,7 @@ import random
 
 #import functions
 from calculus1 import limits, derivatives, pickone
-from linAlg import NewMatrix
+from linAlg import NewMatrix, RREF, Augmented
 from woflram import getSteps, getAnswer
 
 qID = { "id": 0 }
@@ -41,7 +41,7 @@ def apiLinAlg():
     matrix = NewMatrix()
     pickedID = qID["id"]
     questions[qID["id"]] = matrix[1].tolist()
-    solutions[qID["id"]] = "42069" # todo: make solutions work
+    solutions[qID["id"]] = 'placeholder' # todo: make solutions work - this is a placeholder
     qID["id"] += 1
     return { "question": matrix[1].tolist(), "id": pickedID, "matrix": True, "matrixType": 1 if matrix[0] else 0 }
 
@@ -70,6 +70,7 @@ def steps(id):
     q = getQuestion(id)
     if (not q): return "x"
     return json.loads(getSteps(q))
+
 
 if __name__ == '__main__':
     app.run(debug=True)

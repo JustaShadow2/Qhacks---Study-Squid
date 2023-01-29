@@ -47,8 +47,9 @@ async function rollQuestion() {
         if (qs.matrixType == 0) $('#matrixText').text("Solve for the unknowns of the following augmented matrix:")
         else if (qs.matrixType == 1) $('#matrixText').text("Solve for reduced echelon form of the following matrix:")
         $('#theMatrix').empty()
+        debugger;
         qs.question.forEach((row, i) => {
-            $('#theMatrix').append("<div class='matrixRow'>" + row.map(x => `<p>${x}</p>`).join("") + "</div>")
+            $('#theMatrix').append("<div class='matrixRow'>" + "<p>"+ row.map(x => ` ${x} `).join("") + "</p>" + "</div>")
         })
         $('#matrixInfo').show()
     }
