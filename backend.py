@@ -10,6 +10,7 @@ from woflram import getSteps, getAnswer
 
 qID = { "id": 0 }
 questions = {}
+solutions = {}
 
 app = Flask(__name__)
 
@@ -35,9 +36,14 @@ def api():
     qID["id"] += 1
     return { "question": picked[0], "id": pickedID }
 
-@app.route('/api/linalg')
+@app.route('/api/linear')
 def apiLinAlg():
     matrix = NewMatrix()
+    pickedID = qID["id"]
+    questions[qID["id"]] = matrix[1].tolist()
+    solutions[qID["id"]] = "42069" # todo: make solutions work
+    qID["id"] += 1
+    return { "question": matrix[1].tolist(), "id": pickedID, "matrix": True, "matrixType": 1 if matrix[0] else 0 }
 
 @app.route('/api/list')
 def list():
@@ -46,15 +52,17 @@ def list():
 @app.route('/api/solve', methods=['POST'])
 def solve():
     data = request.json
-    print(data)
     q = getQuestion(data["id"])
     if (not q): return "x"
+    intid = int(data["id"])
+    if intid in solutions: return solutions[intid]
     entered = data["answer"]
     key = "Q6XVVP-E4R2JPV6TH"
     print(q)
     print(entered)
     api = "http://api.wolframalpha.com/v1/result?appid=" + key + "&i=" + entered + "%3D" + q
     response = requests.get(api) 
+    solutions[intid] = response.text
     return response.text
 
 @app.route('/api/steps/<path:id>')

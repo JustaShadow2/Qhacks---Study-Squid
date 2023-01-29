@@ -100,6 +100,32 @@ math-field {
     width: 120px;
 }
 
+#theMatrix {
+    border: 1px solid white;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: fit-content;
+    margin: 0px auto 20px auto;
+}
+
+#theMatrix p {
+    font-family: monospace;
+    font-size: 22px;
+    width: 28px;
+    height: 28px;
+    margin: 0px 0px;
+}
+
+.matrixRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
 #hintImage {
     background-color: black;
     margin-top: 15px;

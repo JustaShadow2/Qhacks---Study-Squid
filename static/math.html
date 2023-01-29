@@ -35,7 +35,12 @@
 
     <div id="maths" class="main centerFlex" style="display: none">
         <div class="mainQuestion centerFlex">
-            <math-field read-only id="randQuestion"></math-field>
+            <div id="matrixInfo" class="hideOnLoad">
+                <p style="font-weight: bold" id="matrixText"></p>
+                <div id="theMatrix"></div>
+            </div>
+
+            <math-field read-only class="hideOnLoad" id="randQuestion"></math-field>
 
             <p id="wronglol" class="hideOnLoad" style="margin-top: 0px; color: red"><b>Wrong! Try again.</b></p>
             <p id="correctgg" class="hideOnLoad" style="margin-top: 0px; color: lime"><b>Correct!</b></p>

@@ -23,6 +23,7 @@ function makeQuestion(q) {
 let loading = true
 let answerID = 0
 let guesses = new Set()
+let isMatrix = false
 
 let category = null
 let categoryName = null
@@ -40,7 +41,18 @@ async function rollQuestion() {
     guesses.clear()
     makeQuestion(qs.question)
     answerID = qs.id
+    isMatrix = qs.matrix
     $('#maths').show()
+    if (qs.matrix) {
+        if (qs.matrixType == 0) $('#matrixText').text("Solve for the unknowns of the following augmented matrix:")
+        else if (qs.matrixType == 1) $('#matrixText').text("Solve for reduced echelon form of the following matrix:")
+        $('#theMatrix').empty()
+        qs.question.forEach((row, i) => {
+            $('#theMatrix').append("<div class='matrixRow'>" + row.map(x => `<p>${x}</p>`).join("") + "</div>")
+        })
+        $('#matrixInfo').show()
+    }
+    else $('#randQuestion').show()
     loading = false
 }
 
@@ -81,11 +93,9 @@ $('#steps').click(async function() {
     $('#steps').hide()
     $('#loadingHint').text("Loading steps...")
     $('#loadingHint').show()
-    let steps = await fetch("./api/steps/" + answerID).then(res => res.json())
-    console.log(steps)
+    let steps = isMatrix ? null : await fetch("./api/steps/" + answerID).then(res => res.json())
     if (!steps || !steps.queryresult || !steps.queryresult.pods) return $('#loadingHint').text("No steps availible!")
     let img = steps.queryresult.pods.map(x => x.subpods).flat().sort((a, b) => b.img.height - a.img.height)[0].img
-    console.log(img)
     $('#stepsImg').attr("src", img.src)
     $('#stepsImg').attr("alt", img.alt)
     $('#hintImage').show()
